@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Damião Moreira — Consultoria de Inside Sales para Educação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0b;
+    --bg-raise: #131315;
+    --surface: #18181b;
+    --surface-hi: #1d1d20;
+    --line: #303035;
+    --line-soft: #1e1e22;
+    --white: #f7f7f6;
+    --gray: #b3b3b8;
+    --gray-dim: #7c7c82;
+    --gray-faint: #47474c;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:radial-gradient(1100px 700px at 50% -8%, #161618, var(--bg) 62%);
+    background-color:var(--bg);
+    color:var(--white);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    z-index:3;
+    pointer-events:none;
+    opacity:.035;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  ::selection{background:var(--white);color:var(--bg);}
+  :focus-visible{outline:1px solid var(--white);outline-offset:4px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gray-dim);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+  }
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--gray-faint);}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-0.01em;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    border-bottom:1px solid var(--line-soft);
+  }
+  header::before{
+    content:'';
+    position:absolute;inset:0;
+    z-index:-1;
+    background:rgba(10,10,11,0.78);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+  }
+  nav{
+    max-width:1180px;margin:0 auto;padding:0 32px;
+    height:76px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--serif);
+    font-size:16.5px;
+    letter-spacing:0.05em;
+    font-weight:500;
+  }
+  .logo span{color:var(--gray-dim);font-weight:400;}
+  .nav-links{display:flex;align-items:center;gap:36px;}
+  .nav-links a:not(.nav-cta){
+    font-size:13px;color:var(--gray);
+    transition:color .25s ease;
+    position:relative;
+    padding-bottom:4px;
+  }
+  .nav-links a:not(.nav-cta)::after{
+    content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:var(--white);transform:scaleX(0);transform-origin:left;
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .nav-links a:not(.nav-cta):hover{color:var(--white);}
+  .nav-links a:not(.nav-cta):hover::after{transform:scaleX(1);}
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:12px 20px;
+    border:1px solid var(--white);
+    color:var(--white);
+    transition:all .25s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--white);color:var(--bg);}
+  .burger{display:none;background:none;border:none;color:var(--white);font-size:20px;cursor:pointer;line-height:1;padding:6px;}
+
+  @media (max-width:940px){
+    .nav-links{
+      position:fixed;top:76px;left:0;right:0;bottom:0;
+      background:var(--bg);
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:flex-start;
+      padding:44px 32px;
+      gap:26px;
+      transform:translateX(100%);
+      transition:transform .35s ease;
+      overflow-y:auto;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a:not(.nav-cta){font-size:21px;font-family:var(--serif);color:var(--white);}
+    .nav-cta{margin-top:8px;}
+    .burger{display:block;}
+  }
+
+  /* ---------- PORTRAIT FRAME (signature placeholder) ---------- */
+  .portrait-frame{
+    position:relative;
+    aspect-ratio:4/5;
+    background:radial-gradient(120% 100% at 50% 0%, #1b1b1e 0%, #0d0d0e 75%);
+    border:1px solid var(--line);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    overflow:hidden;
+  }
+  .pf-corner{position:absolute;width:20px;height:20px;opacity:.9;}
+  .pf-tl{top:20px;left:20px;border-top:1px solid var(--gray-dim);border-left:1px solid var(--gray-dim);}
+  .pf-tr{top:20px;right:20px;border-top:1px solid var(--gray-dim);border-right:1px solid var(--gray-dim);}
+  .pf-bl{bottom:20px;left:20px;border-bottom:1px solid var(--gray-dim);border-left:1px solid var(--gray-dim);}
+  .pf-br{bottom:20px;right:20px;border-bottom:1px solid var(--gray-dim);border-right:1px solid var(--gray-dim);}
+  .pf-mark{font-family:var(--serif);font-style:italic;font-weight:300;font-size:56px;color:var(--line);letter-spacing:0.02em;line-height:1;}
+  .pf-rule{width:28px;height:1px;background:var(--line);}
+  .pf-caption{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-dim);text-align:center;line-height:1.9;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:118px;
+    padding-bottom:70px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:64px;
+    align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(36px,5.1vw,64px);
+    line-height:1.08;
+    letter-spacing:-0.02em;
+    max-width:760px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gray);}
+  .hero-sub{
+    margin-top:26px;
+    font-size:16.5px;
+    color:var(--gray);
+    max-width:470px;
+    line-height:1.75;
+  }
+  .hero-cta-row{
+    display:flex;align-items:center;gap:26px;
+    margin-top:42px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:16px 28px;
+    background:var(--white);
+    color:var(--bg);
+    border:1px solid var(--white);
+    transition:all .25s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:transparent;color:var(--white);}
+  .btn-ghost{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gray);
+    border-bottom:1px solid var(--line);
+    padding-bottom:4px;
+    transition:color .25s ease, border-color .25s ease;
+  }
+  .btn-ghost:hover{color:var(--white);border-color:var(--white);}
+
+  .hero-stats{
+    display:flex;gap:52px;
+    margin-top:68px;
+    padding-top:30px;
+    border-top:1px solid var(--line-soft);
+    flex-wrap:wrap;
+  }
+  .stat b{font-family:var(--serif);font-size:30px;font-weight:400;display:block;color:var(--white);}
+  .stat span{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-dim);}
+
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero .portrait-frame{order:-1;max-width:260px;}
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:120px 0;border-bottom:1px solid var(--line-soft);}
+  .section-head{max-width:640px;margin-bottom:60px;}
+  .section-head h2{font-size:clamp(29px,3.4vw,42px);line-height:1.16;}
+  .section-head p{color:var(--gray);margin-top:18px;font-size:15.5px;line-height:1.75;max-width:560px;}
+
+  /* ---------- SOBRE ---------- */
+  .sobre-grid{display:grid;grid-template-columns:0.82fr 1.18fr;gap:72px;}
+  .sobre-text p{color:var(--gray);font-size:16px;line-height:1.85;margin-bottom:22px;}
+  .sobre-text p:first-child{color:var(--white);font-size:19px;font-family:var(--serif);line-height:1.5;margin-bottom:32px;}
+  .sobre-marks{display:flex;gap:36px;margin-top:38px;padding-top:30px;border-top:1px solid var(--line-soft);flex-wrap:wrap;}
+  .mark{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;color:var(--gray);}
+  .mark b{color:var(--white);display:block;font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:4px;letter-spacing:0;}
+
+  @media (max-width:900px){.sobre-grid{grid-template-columns:1fr;}.sobre-grid .portrait-frame{max-width:260px;}}
+
+  /* ---------- DOR / DIAGRAMA DE VAZAMENTO (signature) ---------- */
+  .dor-intro{color:var(--gray);font-size:16px;line-height:1.8;max-width:680px;margin-bottom:64px;}
+  .funnel-wrap{
+    background:linear-gradient(180deg, var(--surface-hi), var(--surface));
+    border:1px solid var(--line);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 50px 90px -50px rgba(0,0,0,.7);
+    padding:52px 48px 44px;
+  }
+  .funnel-label-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px;flex-wrap:wrap;gap:12px;}
+  .funnel-title{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--gray);}
+  .funnel-meta{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-dim);}
+
+  .funnel-stage{
+    display:grid;
+    grid-template-columns:34px 1fr 230px;
+    gap:32px;
+    align-items:center;
+    padding:26px 0;
+    border-top:1px solid var(--line-soft);
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .funnel-stage.in-view{opacity:1;transform:translateY(0);}
+  .funnel-stage:first-of-type{border-top:none;padding-top:6px;}
+  .funnel-num{font-family:var(--mono);font-size:11px;color:var(--gray-faint);}
+  .funnel-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-dim);display:block;margin-bottom:7px;}
+  .funnel-body h4{font-size:15.5px;font-weight:500;color:var(--white);margin-bottom:5px;}
+  .funnel-body p{font-size:13.5px;color:var(--gray-dim);line-height:1.65;max-width:440px;}
+
+  .funnel-chart{display:flex;flex-direction:column;gap:8px;}
+  .funnel-chart-row{display:flex;align-items:center;gap:12px;}
+  .funnel-bar-track{flex:1;height:7px;background:var(--line-soft);position:relative;}
+  .funnel-bar-fill{
+    position:absolute;top:0;left:0;bottom:0;
+    background:linear-gradient(90deg, #58585c, #eeeef0);
+    width:0%;
+    transition:width 1.15s cubic-bezier(.16,1,.3,1);
+  }
+  .funnel-bar-fill::after{
+    content:'';position:absolute;right:0;top:50%;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--white);
+    transform:translate(50%,-50%);
+    box-shadow:0 0 0 3px var(--surface);
+  }
+  .funnel-stage.in-view .funnel-bar-fill{width:var(--pct);}
+  .funnel-pct{font-family:var(--mono);font-size:15px;color:var(--white);width:40px;text-align:right;flex-shrink:0;}
+  .funnel-chart-caption{font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;color:var(--gray-faint);text-align:right;}
+
+  .funnel-disclaimer{
+    margin-top:30px;padding-top:24px;border-top:1px solid var(--line-soft);
+    font-family:var(--mono);font-size:11px;line-height:1.8;color:var(--gray-faint);
+    max-width:600px;
+  }
+
+  @media (max-width:760px){
+    .funnel-stage{grid-template-columns:1fr;gap:12px;}
+    .funnel-chart-caption{text-align:left;}
+    .funnel-wrap{padding:36px 26px;}
+  }
+
+  .dor-footer-line{
+    margin-top:44px;
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--gray);
+    font-size:19px;
+    line-height:1.6;
+    max-width:640px;
+  }
+
+  /* ---------- METODOLOGIA (timeline) ---------- */
+  .method-list{position:relative;padding-left:26px;}
+  .method-list::before{
+    content:'';position:absolute;left:0;top:10px;bottom:10px;width:1px;background:var(--line);
+  }
+  .method-row{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:36px;
+    padding:40px 0;
+    border-top:1px solid var(--line-soft);
+    position:relative;
+  }
+  .method-row:first-child{border-top:none;padding-top:6px;}
+  .method-row:last-child{padding-bottom:6px;}
+  .method-row::before{
+    content:'';position:absolute;left:-26px;top:20px;width:7px;height:7px;border-radius:50%;
+    background:var(--bg);border:1px solid var(--gray);
+  }
+  .method-row:first-child::before{top:0;}
+  .method-num{font-family:var(--serif);font-size:40px;font-weight:300;color:var(--gray-faint);line-height:1;}
+  .method-body h3{font-size:22px;font-weight:500;font-family:var(--sans);margin-bottom:11px;letter-spacing:-0.01em;}
+  .method-body p{color:var(--gray);font-size:15px;max-width:620px;line-height:1.8;}
+  .method-phase-tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--gray-dim);margin-bottom:10px;display:block;
+  }
+  @media (max-width:700px){.method-row{grid-template-columns:1fr;gap:12px;}}
+
+  /* ---------- CASOS ---------- */
+  .casos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .caso-card{background:var(--bg);padding:46px 40px;position:relative;transition:background .3s ease;}
+  .caso-card:hover{background:var(--bg-raise);}
+  .caso-card .caso-num{
+    position:absolute;top:36px;right:36px;
+    font-family:var(--serif);font-size:15px;font-style:italic;color:var(--gray-faint);
+  }
+  .caso-card h3{font-size:23px;margin-bottom:16px;font-weight:500;font-family:var(--sans);max-width:340px;}
+  .caso-card p{color:var(--gray);font-size:14.5px;line-height:1.8;}
+  @media (max-width:800px){.casos-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CONTATO ---------- */
+  .contato-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:72px;}
+  .contato-info h2{font-size:clamp(29px,3.4vw,40px);margin-bottom:22px;}
+  .contato-info p{color:var(--gray);font-size:15.5px;line-height:1.8;max-width:420px;}
+  .contato-direct{margin-top:40px;display:flex;flex-direction:column;gap:15px;}
+  .contato-direct a{font-family:var(--mono);font-size:13px;color:var(--white);border-bottom:1px solid var(--line);width:fit-content;padding-bottom:3px;transition:border-color .25s ease;}
+  .contato-direct a:hover{border-color:var(--white);}
+
+  form{display:flex;flex-direction:column;gap:0;}
+  .field{border-bottom:1px solid var(--line);padding:19px 0;position:relative;}
+  .field label{
+    font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--gray-dim);display:block;margin-bottom:9px;
+  }
+  .field input, .field select{
+    width:100%;background:transparent;border:none;color:var(--white);
+    font-family:var(--sans);font-size:15.5px;padding:0;outline:none;
+  }
+  .field input::placeholder{color:var(--gray-faint);}
+  .field select{
+    appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:20px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237c7c82' stroke-width='1.3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 2px center;
+  }
+  .field select option{background:var(--bg-raise);color:var(--white);}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  .form-submit{margin-top:34px;align-self:flex-start;cursor:pointer;}
+  @media (max-width:600px){.two-col{grid-template-columns:1fr;}.contato-grid{grid-template-columns:1fr;gap:52px;}}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:52px 0 130px;}
+  .footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;margin-bottom:44px;}
+  .footer-logo{font-family:var(--serif);font-size:15.5px;letter-spacing:0.04em;}
+  .footer-legal{display:flex;gap:26px;flex-wrap:wrap;}
+  .footer-legal a{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--gray-dim);}
+  .footer-legal a:hover{color:var(--white);}
+  .footer-bottom{
+    font-family:var(--mono);font-size:11px;color:var(--gray-faint);
+    padding-top:22px;border-top:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  }
+
+  /* ---------- COOKIE BANNER ---------- */
+  .cookie-banner{
+    position:fixed;left:0;right:0;bottom:0;z-index:200;
+    background:var(--surface-hi);
+    border-top:1px solid var(--line);
+    padding:22px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:28px;
+    transform:translateY(110%);
+    transition:transform .5s cubic-bezier(.16,1,.3,1);
+    flex-wrap:wrap;
+  }
+  .cookie-banner.show{transform:translateY(0);}
+  .cookie-banner p{font-size:13px;color:var(--gray);max-width:640px;line-height:1.6;}
+  .cookie-banner p a{color:var(--white);border-bottom:1px solid var(--gray-dim);}
+  .cookie-actions{display:flex;gap:14px;flex-shrink:0;}
+  .cookie-accept{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    padding:13px 24px;background:var(--white);color:var(--bg);border:1px solid var(--white);cursor:pointer;
+  }
+  .cookie-decline{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    padding:13px 24px;background:transparent;color:var(--gray);border:1px solid var(--line);cursor:pointer;
+  }
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:0.01ms !important;animation-duration:0.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">DAMIÃO <span>MOREIRA</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre Damião</a>
+      <a href="#dor">A Dor da Operação</a>
+      <a href="#metodologia">A Metodologia</a>
+      <a href="#casos">Casos de Sucesso</a>
+      <a href="#contato">Contato</a>
+      <a href="#contato" class="nav-cta">Agendar Diagnóstico</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
+  </nav>
+</header>
+
+<section id="inicio" class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Consultoria de Inside Sales · Setor Educacional</div>
+      <h1>Transformando operações comerciais educacionais em <em>máquinas de venda</em> de alta performance</h1>
+      <p class="hero-sub">Gestão estratégica de Inside Sales, reestruturação de processos e aceleração de receita para escolas EAD, instituições técnicas e empresas de cursos B2B e B2C.</p>
+      <div class="hero-cta-row">
+        <a href="#contato" class="btn-primary">Solicitar Diagnóstico Operacional</a>
+        <a href="#metodologia" class="btn-ghost">Ver a metodologia →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>90 dias</b><span>Ciclo de aceleração</span></div>
+        <div class="stat"><b>4 etapas</b><span>Processo auditado</span></div>
+        <div class="stat"><b>2</b><span>Grandes operações lideradas</span></div>
+      </div>
+    </div>
+    <div class="portrait-frame">
+      <span class="pf-corner pf-tl"></span><span class="pf-corner pf-tr"></span>
+      <span class="pf-corner pf-bl"></span><span class="pf-corner pf-br"></span>
+      <div class="pf-mark">DM</div>
+      <div class="pf-rule"></div>
+      <div class="pf-caption">Retrato Oficial<br>Alta Resolução</div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap sobre-grid">
+    <div class="portrait-frame reveal">
+      <span class="pf-corner pf-tl"></span><span class="pf-corner pf-tr"></span>
+      <span class="pf-corner pf-bl"></span><span class="pf-corner pf-br"></span>
+      <div class="pf-mark">DM</div>
+      <div class="pf-rule"></div>
+      <div class="pf-caption">Retrato Oficial<br>Seção Sobre</div>
+    </div>
+    <div class="sobre-text">
+      <div class="eyebrow">Sobre Damião</div>
+      <h2 style="font-size:clamp(27px,3vw,36px);margin-bottom:28px;" class="reveal">Da prática da trincheira à estratégia de grandes operações</h2>
+      <p class="reveal">A maioria das empresas de educação não sofre por falta de demanda de marketing ou qualidade do corpo docente — mas sim pela ausência de um método científico de conversão comercial.</p>
+      <p class="reveal">Ao longo dos últimos anos, liderei e reestruturei operações de Inside Sales de grande porte no segmento educacional brasileiro. Minha trajetória foi consolidada na linha de frente de marcas como Atom Educacional e CPET (Centro de Profissionalização e Educação Técnica), gerando previsibilidade de receita, otimizando o Custo de Aquisição de Clientes (CAC) e estruturando processos escaláveis de vendas.</p>
+      <p class="reveal">Minha atuação combina o rigor técnico de análise de dados operacionais com o treinamento humano do vendedor de Inside Sales. Não entrego teorias acadêmicas ou motivação de palco: entrego processos auditados, playbooks personalizados e acompanhamento contínuo de métricas que se traduzem em faturamento real.</p>
+      <div class="sobre-marks reveal">
+        <div class="mark"><b>Atom Educacional</b>Estruturação de processos comerciais</div>
+        <div class="mark"><b>CPET</b>Reorganização de Inside Sales</div>
+        <div class="mark"><b>CAC</b>Otimização de aquisição</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dor">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">O Desafio</div>
+      <h2>A anatomia do caos comercial nas escolas e empresas de cursos</h2>
+    </div>
+    <p class="dor-intro reveal">O faturamento anual e os releases de imprensa frequentemente escondem um gargalo silencioso dentro das operações de ensino: a ineficiência no atendimento ao lead Inbound. Abaixo, o ciclo que se repete — e onde, exatamente, a receita vaza.</p>
+
+    <div class="funnel-wrap reveal">
+      <div class="funnel-label-row">
+        <div class="funnel-title">O ciclo ineficiente da operação</div>
+        <div class="funnel-meta">Retenção relativa por etapa</div>
+      </div>
+
+      <div class="funnel-stage" data-pct="100">
+        <div class="funnel-num">01</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Aquisição</span>
+          <h4>Tráfego caro</h4>
+          <p>Investimentos pesados são feitos diariamente em campanhas de marketing para atração de alunos e clientes.</p>
+        </div>
+        <div class="funnel-chart">
+          <div class="funnel-chart-row">
+            <div class="funnel-bar-track"><div class="funnel-bar-fill"></div></div>
+            <div class="funnel-pct">100%</div>
+          </div>
+          <div class="funnel-chart-caption">do investimento em mídia</div>
+        </div>
+      </div>
+
+      <div class="funnel-stage" data-pct="68">
+        <div class="funnel-num">02</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Atendimento</span>
+          <h4>Desperdício no atendimento</h4>
+          <p>O lead qualificado entra no CRM ou WhatsApp e enfrenta lentidão no tempo de resposta, falta de cadência e discursos improvisados.</p>
+        </div>
+        <div class="funnel-chart">
+          <div class="funnel-chart-row">
+            <div class="funnel-bar-track"><div class="funnel-bar-fill"></div></div>
+            <div class="funnel-pct">68%</div>
+          </div>
+          <div class="funnel-chart-caption">respondido dentro do prazo ideal</div>
+        </div>
+      </div>
+
+      <div class="funnel-stage" data-pct="41">
+        <div class="funnel-num">03</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Equipe</span>
+          <h4>Turnover &amp; cansaço</h4>
+          <p>O gestor comercial passa o dia apagando incêndios, lida com alta rotatividade e depende do talento individual de 1 ou 2 "estrelas".</p>
+        </div>
+        <div class="funnel-chart">
+          <div class="funnel-chart-row">
+            <div class="funnel-bar-track"><div class="funnel-bar-fill"></div></div>
+            <div class="funnel-pct">41%</div>
+          </div>
+          <div class="funnel-chart-caption">da equipe original ainda ativa</div>
+        </div>
+      </div>
+
+      <div class="funnel-stage" data-pct="19">
+        <div class="funnel-num">04</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Capacitação</span>
+          <h4>Treinamentos inefetivos</h4>
+          <p>Contratam-se palestrantes que deixam o time motivado por uma semana — sem nenhum ganho real nos indicadores do final do mês.</p>
+        </div>
+        <div class="funnel-chart">
+          <div class="funnel-chart-row">
+            <div class="funnel-bar-track"><div class="funnel-bar-fill"></div></div>
+            <div class="funnel-pct">19%</div>
+          </div>
+          <div class="funnel-chart-caption">convertido em matrícula final</div>
+        </div>
+      </div>
+
+      <div class="funnel-disclaimer">Curva ilustrativa do padrão observado em operações comerciais sem processo estruturado — não representa dados de um cliente específico.</div>
+    </div>
+
+    <p class="dor-footer-line reveal">Entender essa dinâmica é o primeiro passo para estancar a perda de margem de lucro e transformar sua equipe comercial em um ativo previsível e gerenciável.</p>
+  </div>
+</section>
+
+<section id="metodologia">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">A Metodologia</div>
+      <h2>Consultoria de imersão e aceleração comercial — ciclo de 90 dias</h2>
+      <p>Um projeto estruturado em quatro etapas lógicas, desenhado para entrar na essência da sua operação, identificar pontos de vazamento de receita e institucionalizar uma cultura de alta conversão.</p>
+    </div>
+
+    <div class="method-list">
+      <div class="method-row reveal">
+        <div class="method-num">01</div>
+        <div class="method-body">
+          <span class="method-phase-tag">Diagnóstico e Auditoria</span>
+          <h3>"Cliente Oculto"</h3>
+          <p>Mapeamento completo do CRM, escuta e análise das chamadas gravadas e auditoria de conversas via WhatsApp. Identificação exata do momento em que o vendedor perde o prospect.</p>
+        </div>
+      </div>
+      <div class="method-row reveal">
+        <div class="method-num">02</div>
+        <div class="method-body">
+          <span class="method-phase-tag">Arquitetura de Processos</span>
+          <h3>Playbooks e rotinas de cadência</h3>
+          <p>Antes de treinar, documentamos. Criação de manuais operacionais, rotinas de cadência, scripts cirúrgicos de abordagem e guias de contorno de objeções de preço e tempo.</p>
+        </div>
+      </div>
+      <div class="method-row reveal">
+        <div class="method-num">03</div>
+        <div class="method-body">
+          <span class="method-phase-tag">Capacitação Prática</span>
+          <h3>Treinamento de roleplay</h3>
+          <p>Imersão com o time de vendas focada na aplicação prática dos novos processos. Simulações reais e intensivas para garantir que o método seja absorvido de forma natural.</p>
+        </div>
+      </div>
+      <div class="method-row reveal">
+        <div class="method-num">04</div>
+        <div class="method-body">
+          <span class="method-phase-tag">Torre de Gestão</span>
+          <h3>Mentoria trimestral</h3>
+          <p>Acompanhamento semanal de métricas — tempo de resposta, taxa de conversão e volume de contatos — junto à liderança, garantindo o cumprimento do plano estratégico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Casos de Sucesso</div>
+      <h2>Linha do tempo de impacto operacional</h2>
+    </div>
+    <div class="casos-grid reveal">
+      <div class="caso-card">
+        <span class="caso-num">01</span>
+        <div class="eyebrow" style="margin-bottom:20px;">Educação · Larga Escala</div>
+        <h3>Atom Educacional</h3>
+        <p>Estruturação e tração de processos comerciais de alto volume, refinando abordagens de vendas e otimizando o funil de conversão.</p>
+      </div>
+      <div class="caso-card">
+        <span class="caso-num">02</span>
+        <div class="eyebrow" style="margin-bottom:20px;">Cursos Técnicos · Nacional</div>
+        <h3>CPET — Centro de Profissionalização e Educação Técnica</h3>
+        <p>Atuação direta na reorganização do Inside Sales da maior instituição de cursos técnicos do país, estabelecendo padrões de atendimento, treinamentos práticos e metas claras para a equipe de vendas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" style="border-bottom:none;">
+  <div class="wrap contato-grid">
+    <div class="contato-info reveal">
+      <div class="eyebrow">Contato &amp; Agendamento</div>
+      <h2>Pronto para transformar o desempenho comercial da sua instituição?</h2>
+      <p>Preencha os dados ao lado para solicitar um diagnóstico preliminar da sua operação de vendas.</p>
+      <div class="contato-direct">
+        <a href="mailto:contato@damiaomoreira.com.br">contato@damiaomoreira.com.br</a>
+        <a href="#">+55 (11) 00000-0000</a>
+      </div>
+    </div>
+    <form class="reveal" onsubmit="event.preventDefault(); this.querySelector('.form-submit').textContent='Solicitação enviada ✓';">
+      <div class="two-col">
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input id="nome" type="text" required placeholder="Seu nome">
+        </div>
+        <div class="field">
+          <label for="cargo">Cargo na empresa</label>
+          <input id="cargo" type="text" required placeholder="Ex.: Diretor Comercial">
+        </div>
+      </div>
+      <div class="field">
+        <label for="empresa">Instituição / empresa de ensino</label>
+        <input id="empresa" type="text" required placeholder="Nome da instituição">
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label for="tamanho">Tamanho da equipe comercial</label>
+          <select id="tamanho" required>
+            <option value="">Selecione</option>
+            <option>1–5</option>
+            <option>6–15</option>
+            <option>16–30</option>
+            <option>30+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="telefone">Telefone / WhatsApp</label>
+          <input id="telefone" type="tel" required placeholder="(00) 00000-0000">
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">E-mail corporativo</label>
+        <input id="email" type="email" required placeholder="voce@empresa.com.br">
+      </div>
+      <button type="submit" class="btn-primary form-submit">Agendar Reunião de Diagnóstico</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-logo">DAMIÃO MOREIRA</div>
+      <div class="footer-legal">
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Conformidade LGPD</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Damião Moreira Consultoria Estratégica © 2026. Todos os direitos reservados.</span>
+      <span>Consultoria de Inside Sales — Setor Educacional</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>Este site utiliza cookies funcionais para proporcionar uma experiência executiva otimizada. Ao navegar, você concorda com nossos <a href="#">Termos de Privacidade</a>.</p>
+  <div class="cookie-actions">
+    <button class="cookie-decline" id="cookieDecline">Recusar</button>
+    <button class="cookie-accept" id="cookieAccept">Aceitar e continuar</button>
+  </div>
+</div>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal, .funnel-stage');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+  }, {threshold:0.12});
+  revealEls.forEach(el => io.observe(el));
+
+  document.querySelectorAll('.funnel-stage').forEach(el => {
+    el.style.setProperty('--pct', el.dataset.pct + '%');
+  });
+
+  const cookieBanner = document.getElementById('cookieBanner');
+  setTimeout(() => { cookieBanner.classList.add('show'); }, 1500);
+  document.getElementById('cookieAccept').addEventListener('click', () => cookieBanner.classList.remove('show'));
+  document.getElementById('cookieDecline').addEventListener('click', () => cookieBanner.classList.remove('show'));
+</script>
+
+</body>
+</html>
